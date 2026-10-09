@@ -1,0 +1,496 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Second Messenger Cascades</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: one reading column; each cascade is a full-width figure with prose between */
+:root{
+  --bg:#FBFAF6; --panel:#FFFFFF; --panel2:#F4F2EA;
+  --ink:#1B1E22; --muted:#5E646C; --line:#E3E0D7; --line2:#CFCBC0;
+  --accent:#0E5A5A; --accent-soft:#E4F0EE;
+  --fast:#B3261E; --fast-soft:#FBECEA;
+  --fed:#1F5FA8;  --fed-soft:#E8F0FA;
+  --gold:#B58100; --gold-soft:#FDF6E4;
+  --go:#15803D;   --go-soft:#E7F5EB;
+  --memb:#EFE6D4;
+  --display:"Fraunces",Georgia,"Times New Roman",serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#12151A; --panel:#191D24; --panel2:#1F242C;
+  --ink:#EAEAE6; --muted:#A3A9B2; --line:#2A3038; --line2:#39414B;
+  --accent:#5FC9BE; --accent-soft:#10312F;
+  --fast:#F09595; --fast-soft:#3A1616;
+  --fed:#8FB8EE;  --fed-soft:#11243A;
+  --gold:#E4B93C; --gold-soft:#332706;
+  --go:#79D18F;   --go-soft:#0D2F1A;
+  --memb:#2B2516; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#12151A; --panel:#191D24; --panel2:#1F242C;
+  --ink:#EAEAE6; --muted:#A3A9B2; --line:#2A3038; --line2:#39414B;
+  --accent:#5FC9BE; --accent-soft:#10312F;
+  --fast:#F09595; --fast-soft:#3A1616;
+  --fed:#8FB8EE;  --fed-soft:#11243A;
+  --gold:#E4B93C; --gold-soft:#332706;
+  --go:#79D18F;   --go-soft:#0D2F1A;
+  --memb:#2B2516; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);
+  font-size:16px;line-height:1.55;-webkit-text-size-adjust:100%}
+.wrap{max-width:900px;margin:0 auto;padding-inline:20px;padding-block:40px 72px}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(1.9rem,5vw,2.9rem);
+  line-height:1.08;letter-spacing:-.015em;margin:0 0 10px;text-wrap:balance}
+h2{font-family:var(--display);font-weight:600;font-size:clamp(1.25rem,3.2vw,1.6rem);
+  line-height:1.2;margin:0 0 8px;text-wrap:balance}
+.kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 8px}
+.lede{color:var(--muted);font-size:1.02rem;max-width:64ch;margin:0}
+section{margin-top:52px}
+figure{margin:20px 0 0;padding:0}
+.fbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  padding:16px 14px;overflow-x:auto}
+svg{display:block;width:100%;height:auto;min-width:620px;font-family:var(--body)}
+figcaption{color:var(--muted);font-size:.88rem;margin-top:12px;max-width:68ch}
+p{max-width:64ch}
+/* svg shared classes */
+.nd{fill:var(--panel2);stroke:var(--line2);stroke-width:1.4}
+.nd-ac{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.6}
+.nd-fast{fill:var(--fast-soft);stroke:var(--fast);stroke-width:1.6}
+.nd-fed{fill:var(--fed-soft);stroke:var(--fed);stroke-width:1.6}
+.nd-go{fill:var(--go-soft);stroke:var(--go);stroke-width:1.6}
+.nd-gold{fill:var(--gold-soft);stroke:var(--gold);stroke-width:1.6}
+.nd-q{fill:var(--panel2);stroke:var(--line);stroke-width:1.2}
+.memb{fill:var(--memb);stroke:var(--line2);stroke-width:1}
+.t{fill:var(--ink);font-size:12.5px}
+.tb{fill:var(--ink);font-size:13px;font-weight:600}
+.ts{fill:var(--muted);font-size:11px}
+.tm{fill:var(--muted);font-size:10.5px}
+.t-ac{fill:var(--accent);font-size:13px;font-weight:600}
+.t-fast{fill:var(--fast);font-size:12px;font-weight:600}
+.t-fed{fill:var(--fed);font-size:12px;font-weight:600}
+.t-go{fill:var(--go);font-size:12px;font-weight:600}
+.cap{fill:var(--muted);font-size:10px;letter-spacing:.1em;font-family:var(--mono)}
+.ln{stroke:var(--ink);stroke-width:1.6;fill:none}
+.ln-fast{stroke:var(--fast);stroke-width:1.8;fill:none}
+.ln-fed{stroke:var(--fed);stroke-width:1.8;fill:none}
+.ln-ac{stroke:var(--accent);stroke-width:1.8;fill:none}
+.ln-mute{stroke:var(--line2);stroke-width:1.4;fill:none;stroke-dasharray:5 4}
+/* panels */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  padding:18px 20px;margin-top:20px}
+.panel h3{font-family:var(--body);font-size:.82rem;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 12px;font-weight:600}
+.rows{display:grid;gap:10px}
+.row{display:grid;grid-template-columns:172px 1fr;gap:14px;align-items:baseline;
+  padding-bottom:10px;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0;padding-bottom:0}
+.row b{font-family:var(--mono);font-size:.78rem;color:var(--accent);font-weight:500;line-height:1.5}
+.row span{font-size:.94rem;min-width:0}
+@media (max-width:560px){.row{grid-template-columns:1fr;gap:3px}}
+.cue{display:grid;gap:12px}
+.cue .c{display:grid;gap:4px;padding:12px 14px;background:var(--panel2);
+  border-radius:10px;border-left:3px solid var(--accent)}
+.cue q{font-family:var(--mono);font-size:.82rem;color:var(--ink);font-style:normal}
+.cue em{font-style:normal;color:var(--muted);font-size:.93rem}
+mark{background:var(--gold-soft);color:var(--ink);border-radius:3px;padding:0 3px}
+.note{font-size:.93rem;color:var(--muted);margin-top:14px}
+</style>
+
+<div class="wrap">
+
+<p class="kicker">Biochem Exam 3 &middot; Lectures 10&ndash;14</p>
+<h1>Second Messenger Cascades</h1>
+<p class="lede">Both systems from the lectures, drawn end to end: the adenylyl cyclase route that glucagon uses, and the calcium&ndash;calmodulin route that reaches the same enzyme by a different door. Then every pathway on this exam lined up against glucagon and insulin.</p>
+
+<section>
+  <h2>1 &middot; The adenylyl cyclase cascade</h2>
+  <p class="lede" style="margin-top:8px">One ligand produces many active phosphorylase molecules because every tier multiplies the one above it. Three separate mechanisms switch it back off.</p>
+
+  <figure>
+  <div class="fbox">
+  <svg viewBox="0 0 820 452" role="img" aria-label="The cAMP cascade: ligand binds a G protein coupled receptor, the alpha subunit exchanges GDP for GTP and leaves the beta gamma dimer, it activates adenylyl cyclase which converts ATP to cyclic AMP, cyclic AMP binds the two regulatory subunits of protein kinase A releasing two catalytic subunits, which phosphorylate serine and threonine residues on target enzymes. Three off switches are shown: the alpha subunit's own GTPase, phosphodiesterase, and phosphoprotein phosphatases.">
+    <defs>
+      <marker id="a1" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+        <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="var(--ink)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+      <marker id="a1f" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+        <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="var(--fast)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+
+    <rect class="memb" x="0" y="76" width="820" height="32"/>
+    <text class="cap" x="4" y="18">OUTSIDE THE CELL</text>
+    <text class="cap" x="4" y="130">CYTOSOL</text>
+
+    <rect class="nd-fast" x="36" y="26" width="200" height="30" rx="15"/>
+    <text class="t-fast" x="136" y="46" text-anchor="middle">Glucagon &#183; epinephrine</text>
+    <line class="ln-fast" x1="136" y1="58" x2="136" y2="70" marker-end="url(#a1f)"/>
+
+    <rect class="nd" x="106" y="68" width="60" height="48" rx="6"/>
+    <text class="tb" x="136" y="97" text-anchor="middle" font-size="11">GPCR</text>
+    <text class="tm" x="136" y="134" text-anchor="middle">seven transmembrane helices</text>
+
+    <path class="ln" d="M168 92 L186 92 L186 160 L202 160" marker-end="url(#a1)"/>
+
+    <rect class="nd" x="206" y="134" width="176" height="56" rx="10"/>
+    <text class="t" x="294" y="156" text-anchor="middle">&#945; subunit swaps GDP for GTP</text>
+    <text class="ts" x="294" y="176" text-anchor="middle">then leaves the &#946;&#947; dimer</text>
+
+    <path class="ln" d="M384 160 L404 160 L404 92 L424 92" marker-end="url(#a1)"/>
+
+    <rect class="nd" x="428" y="68" width="166" height="48" rx="6"/>
+    <text class="tb" x="511" y="97" text-anchor="middle" font-size="12">Adenylyl cyclase</text>
+
+    <line class="ln" x1="511" y1="116" x2="511" y2="158" marker-end="url(#a1)"/>
+    <text class="tm" x="522" y="142">ATP &#8594; cAMP + PP&#7522;</text>
+
+    <rect class="nd-ac" x="451" y="160" width="120" height="32" rx="16"/>
+    <text class="t-ac" x="511" y="181" text-anchor="middle">cAMP</text>
+    <text class="tm" x="582" y="181">the second messenger</text>
+
+    <line class="ln" x1="511" y1="192" x2="511" y2="228" marker-end="url(#a1)"/>
+    <text class="tm" x="522" y="214">binds the 2 regulatory subunits</text>
+
+    <rect class="nd" x="262" y="230" width="500" height="76" rx="10"/>
+    <text class="tb" x="512" y="254" text-anchor="middle">Protein kinase A &#8212; an R&#8322;C&#8322; tetramer</text>
+    <text class="ts" x="512" y="274" text-anchor="middle">cAMP binds the two regulatory subunits, which let go</text>
+    <text class="t-go" x="512" y="296" text-anchor="middle">two catalytic subunits are released &#8212; this is the active kinase</text>
+
+    <line class="ln" x1="512" y1="306" x2="512" y2="342" marker-end="url(#a1)"/>
+
+    <rect class="nd-gold" x="262" y="344" width="500" height="46" rx="10"/>
+    <text class="tb" x="512" y="372" text-anchor="middle">Phosphorylates serine and threonine residues on target enzymes</text>
+
+    <rect class="nd-q" x="16" y="230" width="232" height="160" rx="10"/>
+    <text class="cap" x="30" y="252">SWITCHING IT OFF</text>
+    <text class="t" x="30" y="276">The &#945; subunit&#8217;s own GTPase</text>
+    <text class="ts" x="30" y="293">cuts GTP to GDP, so the signal</text>
+    <text class="ts" x="30" y="309">is short-lived</text>
+    <text class="t" x="30" y="333">Phosphodiesterase</text>
+    <text class="ts" x="30" y="350">cuts cAMP to 5&#8242;-AMP, which</text>
+    <text class="ts" x="30" y="366">is not a signal at all</text>
+    <text class="t" x="30" y="384">Phosphoprotein phosphatases</text>
+
+    <text class="tm" x="16" y="420">G&#8347; proteins stimulate adenylyl cyclase and G&#7522; proteins inhibit it, so the same second messenger can be turned up or down.</text>
+    <text class="tm" x="16" y="440">Each tier amplifies the one above it: one hormone molecule ends in many active phosphorylase molecules.</text>
+  </svg>
+  </div>
+  <figcaption>The slides name two second messenger systems. This is the adenylyl cyclase one; the calcium&ndash;phosphatidylinositol system is in figure 3.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>2 &middot; Where those phosphates land</h2>
+  <p class="lede" style="margin-top:8px">Three targets on this exam, and the one people reverse is the first: phosphorylating the bifunctional enzyme turns its <em>kinase</em> half off and its <em>phosphatase</em> half on, so F2,6-BP goes <strong>down</strong>.</p>
+
+  <figure>
+  <div class="fbox">
+  <svg viewBox="0 0 820 424" role="img" aria-label="Active protein kinase A branches to three targets. First the bifunctional PFK-2 FBP-2 enzyme, whose kinase domain switches off and phosphatase domain on, lowering fructose 2,6-bisphosphate, which slows glycolysis and speeds gluconeogenesis. Second hepatic pyruvate kinase, which becomes inactive so PEP is diverted to glucose. Third phosphorylase kinase, which converts glycogen phosphorylase to its active form while glycogen synthase is inactivated.">
+    <defs>
+      <marker id="a2" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+        <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="var(--ink)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+
+    <rect class="nd-gold" x="320" y="12" width="180" height="34" rx="17"/>
+    <text class="tb" x="410" y="34" text-anchor="middle">Active PKA</text>
+
+    <path class="ln" d="M410 46 L410 68 L135 68 L135 84" marker-end="url(#a2)"/>
+    <path class="ln" d="M410 46 L410 84" marker-end="url(#a2)"/>
+    <path class="ln" d="M410 46 L410 68 L685 68 L685 84" marker-end="url(#a2)"/>
+
+    <!-- branch 1 -->
+    <rect class="nd-gold" x="16" y="86" width="238" height="100" rx="10"/>
+    <text class="tb" x="135" y="108" text-anchor="middle">PFK-2 / FBP-2</text>
+    <text class="ts" x="135" y="126" text-anchor="middle">one protein, two domains</text>
+    <text class="t-fast" x="135" y="148" text-anchor="middle">kinase domain OFF</text>
+    <text class="t-go" x="135" y="168" text-anchor="middle">phosphatase domain ON</text>
+    <line class="ln" x1="135" y1="186" x2="135" y2="214" marker-end="url(#a2)"/>
+    <rect class="nd-fast" x="16" y="216" width="238" height="40" rx="10"/>
+    <text class="tb" x="135" y="241" text-anchor="middle">F2,6-BP falls</text>
+    <line class="ln" x1="135" y1="256" x2="135" y2="284" marker-end="url(#a2)"/>
+    <rect class="nd" x="16" y="286" width="238" height="92" rx="10"/>
+    <text class="t" x="135" y="308" text-anchor="middle">PFK-1 loses its activator</text>
+    <text class="t-fast" x="135" y="327" text-anchor="middle">glycolysis slows</text>
+    <text class="t" x="135" y="350" text-anchor="middle">FBPase-1 released</text>
+    <text class="t-go" x="135" y="369" text-anchor="middle">gluconeogenesis speeds up</text>
+
+    <!-- branch 2 -->
+    <rect class="nd-gold" x="292" y="86" width="236" height="100" rx="10"/>
+    <text class="tb" x="410" y="108" text-anchor="middle">Pyruvate kinase</text>
+    <text class="ts" x="410" y="126" text-anchor="middle">the hepatic enzyme</text>
+    <text class="t-fast" x="410" y="152" text-anchor="middle">INACTIVE</text>
+    <text class="ts" x="410" y="172" text-anchor="middle">once phosphorylated</text>
+    <line class="ln" x1="410" y1="186" x2="410" y2="214" marker-end="url(#a2)"/>
+    <rect class="nd" x="292" y="216" width="236" height="40" rx="10"/>
+    <text class="t" x="410" y="241" text-anchor="middle">PEP is not pulled back</text>
+    <line class="ln" x1="410" y1="256" x2="410" y2="284" marker-end="url(#a2)"/>
+    <rect class="nd" x="292" y="286" width="236" height="92" rx="10"/>
+    <text class="t-go" x="410" y="316" text-anchor="middle">PEP is diverted into</text>
+    <text class="t-go" x="410" y="335" text-anchor="middle">gluconeogenesis</text>
+    <text class="ts" x="410" y="358" text-anchor="middle">glucagon also raises the</text>
+    <text class="ts" x="410" y="373" text-anchor="middle">PEPCK gene through CREB</text>
+
+    <!-- branch 3 -->
+    <rect class="nd-gold" x="566" y="86" width="238" height="100" rx="10"/>
+    <text class="tb" x="685" y="108" text-anchor="middle">Phosphorylase kinase</text>
+    <text class="t-go" x="685" y="128" text-anchor="middle">b &#8594; a, now active</text>
+    <text class="tb" x="685" y="152" text-anchor="middle">Glycogen synthase</text>
+    <text class="t-fast" x="685" y="172" text-anchor="middle">a &#8594; b, now inactive</text>
+    <line class="ln" x1="685" y1="186" x2="685" y2="214" marker-end="url(#a2)"/>
+    <rect class="nd" x="566" y="216" width="238" height="40" rx="10"/>
+    <text class="t" x="685" y="241" text-anchor="middle">Phosphorylase b &#8594; a</text>
+    <line class="ln" x1="685" y1="256" x2="685" y2="284" marker-end="url(#a2)"/>
+    <rect class="nd" x="566" y="286" width="238" height="92" rx="10"/>
+    <text class="t-go" x="685" y="312" text-anchor="middle">glycogen is broken down</text>
+    <text class="ts" x="685" y="336" text-anchor="middle">phosphorylase kinase a is the</text>
+    <text class="ts" x="685" y="352" text-anchor="middle">only enzyme that can make</text>
+    <text class="ts" x="685" y="368" text-anchor="middle">phosphorylase a</text>
+
+    <text class="tm" x="16" y="404">PKA also switches on inhibitors of protein phosphatase-1, so the phosphates it has just added are not stripped straight back off &#8212; the whole state holds.</text>
+  </svg>
+  </div>
+  <figcaption>One signal, opposite directions: the enzymes that build and the enzymes that break down are moved apart by the same phosphate. That is reciprocal regulation.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>3 &middot; The calcium cascade</h2>
+  <p class="lede" style="margin-top:8px">The second system in the lectures. It reaches phosphorylase kinase without PKA and without any phosphorylation at all, which is how a sprinter mobilises glycogen before a hormone could possibly arrive.</p>
+
+  <figure>
+  <div class="fbox">
+  <svg viewBox="0 0 820 486" role="img" aria-label="Two routes raise cytosolic calcium: in the liver epinephrine on an alpha-1 adrenergic receptor triggers a phospholipid dependent cascade releasing calcium from the endoplasmic reticulum, and in muscle a nerve impulse depolarizes the membrane releasing calcium from the sarcoplasmic reticulum. Four calcium ions bind calmodulin, and because calmodulin is the delta subunit of phosphorylase kinase, the b form is activated with no phosphorylation.">
+    <defs>
+      <marker id="a3" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+        <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="var(--ink)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+
+    <rect class="nd-fast" x="20" y="14" width="250" height="34" rx="17"/>
+    <text class="t-fast" x="145" y="36" text-anchor="middle">Epinephrine &#8212; liver</text>
+    <line class="ln" x1="145" y1="48" x2="145" y2="66" marker-end="url(#a3)"/>
+    <rect class="nd" x="20" y="68" width="250" height="78" rx="10"/>
+    <text class="t" x="145" y="92" text-anchor="middle">binds an &#945;&#8321;-adrenergic GPCR</text>
+    <text class="ts" x="145" y="114" text-anchor="middle">this is a different receptor from the</text>
+    <text class="ts" x="145" y="130" text-anchor="middle">one that raises cAMP</text>
+    <line class="ln" x1="145" y1="146" x2="145" y2="174" marker-end="url(#a3)"/>
+    <rect class="nd" x="20" y="176" width="250" height="60" rx="10"/>
+    <text class="t" x="145" y="200" text-anchor="middle">a phospholipid-dependent</text>
+    <text class="t" x="145" y="218" text-anchor="middle">cascade moves Ca&#178;&#8314; out of the ER</text>
+
+    <rect class="nd-ac" x="550" y="14" width="250" height="34" rx="17"/>
+    <text class="t-ac" x="675" y="36" text-anchor="middle">Nerve impulse &#8212; muscle</text>
+    <line class="ln" x1="675" y1="48" x2="675" y2="66" marker-end="url(#a3)"/>
+    <rect class="nd" x="550" y="68" width="250" height="78" rx="10"/>
+    <text class="t" x="675" y="92" text-anchor="middle">membrane depolarization</text>
+    <text class="ts" x="675" y="114" text-anchor="middle">no hormone is involved here</text>
+    <text class="ts" x="675" y="130" text-anchor="middle">at any point</text>
+    <line class="ln" x1="675" y1="146" x2="675" y2="174" marker-end="url(#a3)"/>
+    <rect class="nd" x="550" y="176" width="250" height="60" rx="10"/>
+    <text class="t" x="675" y="200" text-anchor="middle">Ca&#178;&#8314; is released from the</text>
+    <text class="t" x="675" y="218" text-anchor="middle">sarcoplasmic reticulum</text>
+
+    <path class="ln" d="M145 236 L145 262 L410 262 L410 288" marker-end="url(#a3)"/>
+    <path class="ln" d="M675 236 L675 262 L410 262"/>
+
+    <rect class="nd-gold" x="250" y="290" width="320" height="80" rx="10"/>
+    <text class="tb" x="410" y="314" text-anchor="middle">Four Ca&#178;&#8314; bind calmodulin</text>
+    <text class="ts" x="410" y="336" text-anchor="middle">the complex changes shape and switches on</text>
+    <text class="ts" x="410" y="352" text-anchor="middle">proteins that were inactive</text>
+
+    <line class="ln" x1="410" y1="370" x2="410" y2="398" marker-end="url(#a3)"/>
+
+    <rect class="nd-go" x="186" y="400" width="448" height="76" rx="10"/>
+    <text class="tb" x="410" y="424" text-anchor="middle">Calmodulin is the &#948; subunit of phosphorylase kinase</text>
+    <text class="t-go" x="410" y="446" text-anchor="middle">so the b form is activated with no phosphorylation</text>
+    <text class="ts" x="410" y="466" text-anchor="middle">&#8594; glycogen phosphorylase b becomes a &#8594; glycogen is broken down</text>
+  </svg>
+  </div>
+  <figcaption>Both cascades converge on phosphorylase kinase, which is why muscle can run glycogenolysis with no glucagon receptors at all. AMP reaches the same end even more directly, by activating phosphorylase b itself.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>4 &middot; The fed arm</h2>
+  <p class="lede" style="margin-top:8px">Insulin does not use cAMP. It keeps the cascade quiet and lets a phosphatase undo everything PKA did, then changes the amount of enzyme over hours.</p>
+
+  <figure>
+  <div class="fbox">
+  <svg viewBox="0 0 820 210" role="img" aria-label="With insulin high and glucagon low, cAMP and protein kinase A stay low and protein phosphatase 1 removes the phosphates, so the PFK-2 kinase domain is active and fructose 2,6-bisphosphate rises, glycogen synthase is on and phosphorylase off, and gene transcription shifts with PEPCK down and glucokinase and G6PD up.">
+    <defs>
+      <marker id="a4" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+        <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="var(--fed)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+
+    <rect class="nd-fed" x="8" y="68" width="136" height="56" rx="10"/>
+    <text class="t-fed" x="76" y="92" text-anchor="middle">Insulin high</text>
+    <text class="ts" x="76" y="110" text-anchor="middle">glucagon low</text>
+    <line class="ln-fed" x1="146" y1="96" x2="176" y2="96" marker-end="url(#a4)"/>
+
+    <rect class="nd" x="180" y="62" width="192" height="68" rx="10"/>
+    <text class="t" x="276" y="86" text-anchor="middle">cAMP and PKA stay low</text>
+    <text class="t" x="276" y="108" text-anchor="middle">PP1 strips the phosphates off</text>
+
+    <path class="ln-fed" d="M374 96 L392 96 L392 38 L408 38" marker-end="url(#a4)"/>
+    <path class="ln-fed" d="M374 96 L408 96" marker-end="url(#a4)"/>
+    <path class="ln-fed" d="M374 96 L392 96 L392 154 L408 154" marker-end="url(#a4)"/>
+
+    <rect class="nd-fed" x="412" y="16" width="396" height="44" rx="10"/>
+    <text class="tb" x="426" y="36" font-size="12">PFK-2 kinase domain on &#8594; F2,6-BP rises</text>
+    <text class="ts" x="426" y="52">PFK-1 activated, FBPase-1 inhibited, pyruvate kinase active again</text>
+
+    <rect class="nd-fed" x="412" y="74" width="396" height="44" rx="10"/>
+    <text class="tb" x="426" y="94" font-size="12">Glycogen synthase on, phosphorylase off</text>
+    <text class="ts" x="426" y="110">the same PP1 flips both at once</text>
+
+    <rect class="nd-fed" x="412" y="132" width="396" height="44" rx="10"/>
+    <text class="tb" x="426" y="152" font-size="12">Transcription shifts &#8212; hours, not seconds</text>
+    <text class="ts" x="426" y="168">PEPCK gene down &#183; glucokinase and G6PD up</text>
+
+    <text class="tm" x="8" y="198">Cortisol pushes the other way on the PEPCK gene, alongside glucagon.</text>
+  </svg>
+  </div>
+  <figcaption>Everything in figures 1 to 3 runs backwards here. Fixing one direction in memory is enough, because the other is its mirror at every tier.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>5 &middot; Every pathway on this exam</h2>
+  <p class="lede" style="margin-top:8px">Two of the five lectures have no hormonal control at all. Knowing which ones is worth as much as knowing the cascades.</p>
+
+  <figure>
+  <div class="fbox">
+  <svg viewBox="0 0 820 566" role="img" aria-label="Grid of the five Exam 3 lectures showing what glucagon does on the left and insulin on the right. Gluconeogenesis and glycogen metabolism are controlled by both hormones; the pentose phosphate pathway responds only slowly to insulin through enzyme amount; fructose and galactose metabolism and GAG synthesis have no hormonal control.">
+    <defs>
+      <marker id="a5f" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="var(--fast)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+      <marker id="a5d" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M1 1.5L8.5 5L1 8.5" fill="none" stroke="var(--fed)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+
+    <rect class="nd-fast" x="6" y="8" width="180" height="38" rx="8"/>
+    <text class="t-fast" x="96" y="26" text-anchor="middle">GLUCAGON</text>
+    <text class="ts" x="96" y="40" text-anchor="middle">fasting &#183; cAMP &#183; PKA</text>
+
+    <rect class="nd-fed" x="634" y="8" width="180" height="38" rx="8"/>
+    <text class="t-fed" x="724" y="26" text-anchor="middle">INSULIN</text>
+    <text class="ts" x="724" y="40" text-anchor="middle">fed &#183; phosphatases</text>
+
+    <rect class="nd" x="210" y="56" width="400" height="88" rx="10"/>
+    <text class="cap" x="226" y="76">LECTURE 10</text>
+    <text class="tb" x="226" y="96">Gluconeogenesis</text>
+    <text class="ts" x="226" y="114">Regulated steps: pyruvate carboxylase and</text>
+    <text class="ts" x="226" y="130">fructose 1,6-bisphosphatase</text>
+    <line class="ln-fast" x1="188" y1="100" x2="206" y2="100" marker-end="url(#a5f)"/>
+    <line class="ln-fed" x1="632" y1="100" x2="614" y2="100" marker-end="url(#a5d)"/>
+    <text class="tm" x="6" y="80">F2,6-BP falls</text>
+    <text class="tm" x="6" y="96">FBPase-1 on, PK off</text>
+    <text class="tm" x="6" y="112">PEPCK gene up</text>
+    <text class="tm" x="6" y="128">(cortisol does this too)</text>
+    <text class="tm" x="814" y="88" text-anchor="end">F2,6-BP rises</text>
+    <text class="tm" x="814" y="104" text-anchor="end">FBPase-1 off, PK on</text>
+    <text class="tm" x="814" y="120" text-anchor="end">PEPCK gene down</text>
+
+    <rect class="nd" x="210" y="156" width="400" height="88" rx="10"/>
+    <text class="cap" x="226" y="176">LECTURE 11</text>
+    <text class="tb" x="226" y="196">Glycogen metabolism</text>
+    <text class="ts" x="226" y="214">One phosphate decides both: synthase and</text>
+    <text class="ts" x="226" y="230">phosphorylase always move in opposition</text>
+    <line class="ln-fast" x1="188" y1="200" x2="206" y2="200" marker-end="url(#a5f)"/>
+    <line class="ln-fed" x1="632" y1="200" x2="614" y2="200" marker-end="url(#a5d)"/>
+    <text class="tm" x="6" y="184">PKA &#8594; phosphorylase</text>
+    <text class="tm" x="6" y="200">kinase b &#8594; a</text>
+    <text class="tm" x="6" y="216">phosphorylase ON</text>
+    <text class="tm" x="6" y="232">synthase OFF</text>
+    <text class="tm" x="814" y="184" text-anchor="end">PP1 removes the P</text>
+    <text class="tm" x="814" y="204" text-anchor="end">synthase ON</text>
+    <text class="tm" x="814" y="220" text-anchor="end">phosphorylase OFF</text>
+
+    <rect class="nd" x="210" y="256" width="400" height="88" rx="10"/>
+    <text class="cap" x="226" y="276">LECTURE 12</text>
+    <text class="tb" x="226" y="296">Fructose, galactose, polyol</text>
+    <text class="ts" x="226" y="314">Fructose joins glycolysis below PFK-1, so it skips</text>
+    <text class="ts" x="226" y="330">the rate-limiting step entirely</text>
+    <line class="ln-mute" x1="188" y1="300" x2="206" y2="300"/>
+    <line class="ln-mute" x1="632" y1="300" x2="614" y2="300"/>
+    <text class="tm" x="6" y="294">no cAMP control</text>
+    <text class="tm" x="6" y="310">of these steps</text>
+    <text class="tm" x="814" y="286" text-anchor="end">Uptake needs no insulin:</text>
+    <text class="tm" x="814" y="302" text-anchor="end">GLUT-5 for fructose,</text>
+    <text class="tm" x="814" y="318" text-anchor="end">galactose likewise</text>
+
+    <rect class="nd" x="210" y="356" width="400" height="88" rx="10"/>
+    <text class="cap" x="226" y="376">LECTURE 13</text>
+    <text class="tb" x="226" y="396">Pentose phosphate pathway</text>
+    <text class="ts" x="226" y="414">G6PD is held in check minute to minute by the</text>
+    <text class="ts" x="226" y="430">NADPH/NADP&#8314; ratio, not by a hormone</text>
+    <line class="ln-mute" x1="188" y1="400" x2="206" y2="400"/>
+    <line class="ln-fed" x1="632" y1="400" x2="614" y2="400" marker-end="url(#a5d)"/>
+    <text class="tm" x="6" y="394">no cAMP control</text>
+    <text class="tm" x="814" y="386" text-anchor="end">Raises the AMOUNT of</text>
+    <text class="tm" x="814" y="402" text-anchor="end">G6PD by induction</text>
+    <text class="tm" x="814" y="418" text-anchor="end">&#8212; slow, hours not seconds</text>
+
+    <rect class="nd" x="210" y="456" width="400" height="88" rx="10"/>
+    <text class="cap" x="226" y="476">LECTURE 14</text>
+    <text class="tb" x="226" y="496">GAGs and glycoproteins</text>
+    <text class="ts" x="226" y="514">Built in the Golgi from UDP-sugars; sulfation last,</text>
+    <text class="ts" x="226" y="530">from PAPS. Degraded in lysosomes.</text>
+    <line class="ln-mute" x1="188" y1="500" x2="206" y2="500"/>
+    <line class="ln-mute" x1="632" y1="500" x2="614" y2="500"/>
+    <text class="tm" x="6" y="494">no hormonal control</text>
+    <text class="tm" x="6" y="510">in these lectures</text>
+    <text class="tm" x="814" y="494" text-anchor="end">supply of UDP-sugars</text>
+    <text class="tm" x="814" y="510" text-anchor="end">is the limit, not insulin</text>
+  </svg>
+  </div>
+  <figcaption>Dashed lines mean no control, not weak control. If a stem attaches glucagon or insulin to fructose metabolism or to GAG synthesis, that is the trap.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <h2>6 &middot; The layer underneath</h2>
+  <p>Allosteric effectors work on their own timescale and can override whichever hormone is high. These are the ones that appear across Lectures 10, 11 and 13.</p>
+  <div class="panel">
+    <h3>Works regardless of which hormone is high</h3>
+    <div class="rows">
+      <div class="row"><b>acetyl CoA</b><span>Activates pyruvate carboxylase and inhibits the PDH complex. It rises in a fast because &beta;-oxidation outruns the liver's capacity to burn it.</span></div>
+      <div class="row"><b>AMP</b><span>Activates PFK-1, inhibits fructose 1,6-bisphosphatase. <mark>Low AMP with high ATP favours making glucose.</mark></span></div>
+      <div class="row"><b>glucose 6-phosphate</b><span>Activates glycogen synthase, inhibits glycogen phosphorylase &mdash; the same reciprocal shape as the hormones, one tier down.</span></div>
+      <div class="row"><b>free glucose</b><span>Inhibits glycogen phosphorylase <em>in the liver only</em>, which fits the liver's job of serving blood glucose.</span></div>
+      <div class="row"><b>AMP in muscle</b><span>Activates glycogen phosphorylase b directly, with no phosphorylation at all. Muscle has no glucagon receptors.</span></div>
+      <div class="row"><b>Ca&sup2;&#8314;&ndash;calmodulin</b><span>The third route to phosphorylase kinase, drawn in figure 3. Contraction itself mobilises muscle glycogen.</span></div>
+      <div class="row"><b>NADPH</b><span>A potent competitive inhibitor of G6PD. The pentose phosphate pathway idles until the NADPH/NADP&#8314; ratio falls.</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>7 &middot; Reading the stem</h2>
+  <div class="panel">
+    <h3>What the cue is really asking</h3>
+    <div class="cue">
+      <div class="c"><q>&ldquo;a high glucagon-to-insulin ratio&rdquo;</q><em>PKA phosphorylates the bifunctional enzyme &rarr; phosphatase domain wins &rarr; F2,6-BP falls &rarr; FBPase-1 released, PFK-1 loses its activator.</em></div>
+      <div class="c"><q>&ldquo;the phosphorylated bifunctional enzyme&rdquo;</q><em>The FBP-2 phosphatase half is the active one. Phosphorylation picks a domain; it does not switch the protein off.</em></div>
+      <div class="c"><q>&ldquo;two hours after a meal&rdquo;</q><em>Dephosphorylated everywhere: PFK-2 kinase domain on, F2,6-BP up, pyruvate kinase active, glycogen synthase active, phosphorylase off.</em></div>
+      <div class="c"><q>&ldquo;phosphorylated glycogen enzymes&rdquo;</q><em>Phosphorylase ON, synthase OFF &mdash; the reverse of the intuition that phosphorylation activates everything.</em></div>
+      <div class="c"><q>&ldquo;&alpha;&#8321;-adrenergic&rdquo; or &ldquo;calmodulin&rdquo;</q><em>The calcium system, not cAMP. It ends at phosphorylase kinase without any phosphorylation, because calmodulin is its &delta; subunit.</em></div>
+      <div class="c"><q>&ldquo;exercising muscle, no hormone mentioned&rdquo;</q><em>Ca&sup2;&#8314;&ndash;calmodulin and AMP. Muscle cannot answer glucagon and cannot release glucose.</em></div>
+      <div class="c"><q>&ldquo;fructose is given instead of glucose&rdquo;</q><em>It enters below PFK-1, bypassing the rate-limiting step, and its uptake needs no insulin.</em></div>
+      <div class="c"><q>&ldquo;cortisol&rdquo;</q><em>Raises PEPCK transcription alongside glucagon; insulin lowers it. Slow and transcriptional, not allosteric.</em></div>
+    </div>
+  </div>
+  <p class="note">One sentence that covers most of it: phosphorylation turns the liver into an exporter &mdash; glycogen phosphorylase on, glycogen synthase off, pyruvate kinase off, F2,6-BP down and so gluconeogenesis up.</p>
+</section>
+
+</div>
+
+</body></html>
